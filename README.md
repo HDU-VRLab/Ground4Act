@@ -43,8 +43,8 @@ pip3 install -r requirements.txt
 
 | Resource             | Description          |
 |----------------------|----------------------|
-| [Sim_model](https://github.com/nizhihao/Collaborative-Pushing-Grasping/tree/master/myur_ws/src/ur_robotiq/ur_robotiq_gazebo/meshes) | Place the downloaded simulation model under /home/xxx/.gazebo/models. |
-| [Ground4Act](https://pan.baidu.com/s/1jalj3nmUaaE2AAztAjAgfw?pwd=1234) |Place the downloaded Push network weight in src\gjt_ur_moveit_gazebo\env_info\push.pth. The Visual Grounding weight is placed in src\vl_grasp\logs. |
+| [Sim_model](https://github.com/nizhihao/Collaborative-Pushing-Grasping/tree/master/myur_ws/src/ur_robotiq/ur_robotiq_gazebo/meshes) | Place the downloaded simulation model under "/home/xxx/.gazebo/models". |
+| [Ground4Act](https://pan.baidu.com/s/1jalj3nmUaaE2AAztAjAgfw?pwd=1234) |Place the downloaded Push network weight in "src\gjt_ur_moveit_gazebo\env_info\push.pth". The Visual Grounding weight is placed in "src\vl_grasp\logs". |
 
 ## Getting Started
 
