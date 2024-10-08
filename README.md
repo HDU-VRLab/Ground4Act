@@ -115,7 +115,7 @@ Many thanks to previous researchers for sharing their excellent work:
 ```
 
 ## BibTeX
-
+If you find our code or models useful in your work, please cite [our paper](https://www.sciencedirect.com/science/article/pii/S0262885624003858)
 ```bibtex
 @article{YANG2024105280,
   title = {Ground4Act: Leveraging visual-language model for collaborative pushing and grasping in clutter},
