@@ -1,6 +1,6 @@
 # Ground4Act: Leveraging Visual-Language Model for Collaborative Pushing and Grasping in Clutter
 
-🌟This repository contains the implementation of [Ground4Act](https://www.sciencedirect.com/science/article/pii/S0262885624003858), a two-stage approach for collaborative pushing and grasping in clutter using a visual-language model. 📗[**Demonstration**](#demonstration) | [**Installation**](#installation) | [**Model Weights**](#model-weights) | [**Getting Started**](#getting-started) | [**Related Work**](#related-work) | [**BibTeX**](#bibtex)
+🌟This repository contains the implementation of [Ground4Act](https://www.sciencedirect.com/science/article/pii/S0262885624003858), a two-stage approach for collaborative pushing and grasping in clutter using a visual-language model.📗[**Demonstration**](#demonstration) | [**Installation**](#installation) | [**Model Weights**](#model-weights) | [**Getting Started**](#getting-started) | [**Related Work**](#related-work) | [**BibTeX**](#bibtex)
 
 ## Demonstration
 
@@ -10,7 +10,7 @@ The repository is based on ubuntu18.04. Before you start, ensure that [ROS (Robo
 
 ### Step 1: Clone the Repository
 
-Open your terminal (**Python 2**) and run the following command to clone the repository.
+Open your terminal (**Python 2**) and run the following command to clone the repository:
 
 ```bash
 mkdir ur_ws && cd ur_ws
@@ -66,7 +66,9 @@ source ./devel/setup.bash
 roslaunch gjt_ur_moveit_gazebo start_gjt_ur_moveit_gazebo.launch 
 ```
 
-We provide many useful [unit test scripts](src/gjt_ur_moveit_gazebo/gazebo_scripts). Preloading the object model in gazebo helps with later execution speed.<br> So it is recommended to run in sequence at terminal 2:
+We provide many useful [unit test scripts](src/gjt_ur_moveit_gazebo/gazebo_scripts). Preloading the object model in gazebo helps with later execution speed. 
+
+So it is recommended to run in sequence at terminal 2:
 
 ```bash
 python src/gjt_ur_moveit_gazebo/gazebo_scripts/spawn_model.py
@@ -114,7 +116,9 @@ Many thanks to previous researchers for sharing their excellent work:
 ```
 
 ## BibTeX
+
 If you find our code or models useful in your work, please cite [our paper](https://www.sciencedirect.com/science/article/pii/S0262885624003858).
+
 ```bibtex
 @article{YANG2024105280,
   title = {Ground4Act: Leveraging visual-language model for collaborative pushing and grasping in clutter},
