@@ -4,7 +4,7 @@
 
 ## Demonstration
 🤖[Video](https://www.bilibili.com/video/BV1Jj2nY1EhR/?spm_id_from=333.999.0.0&vd_source=63cd8055657905c0ac8a9388d7a972ed)
-🌐[Home page](https://space.bilibili.com/485363351/video)
+🌐[Personal homepage](https://space.bilibili.com/485363351/video)
 ## Installation
 
 The repository is based on ubuntu18.04. Before you start, ensure that [ROS (Robot Operating System)](http://wiki.ros.org/) is installed on your system.
