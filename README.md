@@ -9,7 +9,9 @@
 
 ## Installation
 
-The repository is based on ubuntu18.04. Before you start, ensure that [ROS (Robot Operating System)](http://wiki.ros.org/) is installed on your system.
+The repository is based on ubuntu18.04.
+
+Before you start, ensure that [ROS (Robot Operating System)](http://wiki.ros.org/) is installed on your system.
 
 ### Step 1: Clone the Repository
 
