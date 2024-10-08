@@ -58,7 +58,7 @@ This setup is crucial for ensuring proper functionality and compatibility betwee
 
 ### Step 1: Launch simulation and load MoveIt
 
-Note: Please turn on the simulation button in the lower left corner of gazebo, then you can control the robot through [MoveIt](https://moveit.ros.org/).
+Please turn on the simulation button in the lower left corner of gazebo, then you can control the robot through [MoveIt](https://moveit.ros.org/).
 
 ```bash
 cd ur_ws
