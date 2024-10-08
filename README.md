@@ -3,7 +3,8 @@
 🌟This repository contains the implementation of [Ground4Act](https://www.sciencedirect.com/science/article/pii/S0262885624003858), a two-stage approach for collaborative pushing and grasping in clutter using a visual-language model.📗[**Demonstration**](#demonstration) | [**Installation**](#installation) | [**Model Weights**](#model-weights) | [**Getting Started**](#getting-started) | [**Related Work**](#related-work) | [**BibTeX**](#bibtex)
 
 ## Demonstration
-
+🤖[Video](https://www.bilibili.com/video/BV1Jj2nY1EhR/?spm_id_from=333.999.0.0&vd_source=63cd8055657905c0ac8a9388d7a972ed)
+🌐[Home page](https://space.bilibili.com/485363351/video)
 ## Installation
 
 The repository is based on ubuntu18.04. Before you start, ensure that [ROS (Robot Operating System)](http://wiki.ros.org/) is installed on your system.
