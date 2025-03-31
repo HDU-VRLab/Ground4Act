@@ -1,0 +1,11 @@
+pycocotools
+tqdm
+cython
+scipy
+transformers
+opencv-python
+catkin-tools 
+rospkg
+pyyaml
+empy
+numpy
