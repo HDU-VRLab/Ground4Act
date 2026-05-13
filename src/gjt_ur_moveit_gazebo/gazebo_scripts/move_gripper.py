@@ -7,11 +7,13 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 def control_gripper(value):
     # rospy.init_node('gripper_control_node', anonymous=True)
-    client = actionlib.SimpleActionClient('/gripper_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+    action_ns = rospy.get_param('~gripper_action_ns', '/gripper_controller/follow_joint_trajectory')
+    joint_name = rospy.get_param('~gripper_joint_name', 'gripper_finger1_joint')
+    client = actionlib.SimpleActionClient(action_ns, FollowJointTrajectoryAction)
     client.wait_for_server()
 
     trajectory = JointTrajectory()
-    trajectory.joint_names = ['gripper_finger1_joint']  
+    trajectory.joint_names = [joint_name]
 
     point = JointTrajectoryPoint()
     point.positions = [value] 

@@ -17,13 +17,14 @@ class MoveIt_Control:
     def __init__(self):
         moveit_commander.roscpp_initialize(sys.argv)
         rospy.init_node('moveit_control_server', anonymous=False)
-        self.arm = moveit_commander.MoveGroupCommander('arm')
+        self.arm_group_name = rospy.get_param('~arm_group_name', 'arm')
+        self.arm = moveit_commander.MoveGroupCommander(self.arm_group_name)
         self.arm.set_goal_joint_tolerance(0.01)
         self.arm.set_goal_position_tolerance(0.01)
         self.arm.set_goal_orientation_tolerance(0.01)
 
         self.end_effector_link = self.arm.get_end_effector_link()
-        self.reference_frame = 'base_link'
+        self.reference_frame = rospy.get_param('~reference_frame', 'base_link')
         self.arm.set_pose_reference_frame(self.reference_frame)
         self.arm.set_planning_time(5)
         self.arm.allow_replanning(True)
@@ -139,8 +140,10 @@ class MoveIt_Control:
     def go_home(self,a=1,v=1):
         self.arm.set_max_acceleration_scaling_factor(a)
         self.arm.set_max_velocity_scaling_factor(v)
-        grasp_home= [ 0.000196635662551, -1.75733057251, 1.30864952802,
-                                      -1.11879747439, -1.5668002396, -1.54]
+        grasp_home = rospy.get_param('~home_joint_values', [
+            0.000196635662551, -1.75733057251, 1.30864952802,
+            -1.11879747439, -1.5668002396, -1.54
+        ])
         self.move_j(grasp_home)
         rospy.sleep(0.3)
 

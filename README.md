@@ -135,3 +135,58 @@ If you find our code or models useful in your work, please cite [our paper](http
   url = {https://www.sciencedirect.com/science/article/pii/S0262885624003858}
 }
 ```
+
+
+## Deploy to AgileX Piper (ROS Noetic)
+
+> 当前环境无法直接联网拉取 `piper_ros`（GitHub 403），所以我把“可直接替换/运行”的落地方式写成了**可执行步骤**。
+
+### 1) 在你的 Piper 工作空间中放置 Ground4Act 代码
+
+假设你的 Piper 工作空间是 `~/piper_ws`，把本仓库放到同一个 `src` 下：
+
+```bash
+cd ~/piper_ws/src
+# 放入 Ground4Act 项目目录（例如 git clone 或拷贝）
+```
+
+### 2) 直接使用一键启动文件（不再手动 rosparam load）
+
+我已新增：
+- `src/gjt_ur_moveit_gazebo/launch/start_piper_ground4act.launch`
+
+它会自动：
+1. 加载 `piper_adapter_params.yaml`
+2. 启动 `moveitServer.py`
+3. 暴露 `moveit_grasp`（可改名）服务
+
+启动命令：
+
+```bash
+roslaunch gjt_ur_moveit_gazebo start_piper_ground4act.launch
+```
+
+### 3) 你只需要改一个文件
+
+按你的 Piper MoveIt 配置修改：
+- `src/gjt_ur_moveit_gazebo/config/piper_adapter_params.yaml`
+
+重点字段：
+- `arm_group_name`
+- `home_joint_values`
+- `gripper_action_ns`
+- `gripper_joint_name`
+- `work_surface_z` / offsets
+
+### 4) 与 piper_ros 的衔接方式
+
+先启动 Piper 官方 MoveIt（noetic）后，再启动 Ground4Act 服务。流程如下：
+
+1. 启动 piper_ros 的机器人驱动 + MoveIt。
+2. 执行：`roslaunch gjt_ur_moveit_gazebo start_piper_ground4act.launch`。
+3. 复用原 `moveit_grasp` 服务调用链（push/grasp/reset）。
+
+### 5) 如果你要“直接替换到 piper_ros 包内”
+
+不建议改官方包源码，推荐通过工作空间叠加。
+如果你一定要替换，可将本项目 `gjt_ur_moveit_gazebo/gazebo_scripts` 下脚本复制到你自己的控制包，并保留同名服务接口 `moveit_grasp`。
