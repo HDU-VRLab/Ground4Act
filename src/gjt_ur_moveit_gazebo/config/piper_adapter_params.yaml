@@ -1,0 +1,20 @@
+# Parameters for running Ground4Act moveitServer on a Piper robot
+# Load with: roslaunch ... <rosparam file="$(find gjt_ur_moveit_gazebo)/config/piper_adapter_params.yaml" command="load"/>
+
+arm_group_name: piper_arm
+reference_frame: base_link
+base_frame: base_link
+
+# Replace with your Piper home joint values (rad)
+home_joint_values: [0.0, -1.2, 1.2, 0.0, 0.8, 0.0]
+
+# Replace with your Piper end-effector gripper controller
+gripper_action_ns: /gripper_controller/follow_joint_trajectory
+gripper_joint_name: gripper_finger1_joint
+
+# Workspace tuning
+work_surface_z: 0.014
+tool_z_offset: 0.165
+approach_offset: 0.03
+grasp_depth_offset: 0.025
+push_length: 0.13

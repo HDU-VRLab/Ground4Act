@@ -18,6 +18,12 @@ class UR_Grasp:
         self.camera = ImageSaver()
         self.buffer = tf2_ros.Buffer()
         self.listener = tf2_ros.TransformListener(self.buffer)
+        self.base_frame = rospy.get_param('~base_frame', 'base_link')
+        self.work_surface_z = rospy.get_param('~work_surface_z', 0.0139576627708)
+        self.tool_z_offset = rospy.get_param('~tool_z_offset', 0.165)
+        self.approach_offset = rospy.get_param('~approach_offset', 0.03)
+        self.grasp_depth_offset = rospy.get_param('~grasp_depth_offset', 0.025)
+        self.push_length = rospy.get_param('~push_length', 0.13)
         control_gripper(0)
 
     def get_pos_in_camera(self,pix_x,pix_y,cam_intrinsics):
@@ -50,15 +56,15 @@ class UR_Grasp:
         point_source.point.x = world_position[0]
         point_source.point.y = world_position[1]
         point_source.point.z = world_position[2]
-        point_target = self. buffer.transform(point_source,"base_link",timeout=rospy.Duration(0.1))
+        point_target = self.buffer.transform(point_source, self.base_frame, timeout=rospy.Duration(0.1))
         base_link_pos = [point_target.point.x,point_target.point.y,point_target.point.z]
         print("base_link : {}".format(base_link_pos))
         return base_link_pos
 
     def grasp(self,base_link_pos,angle,gripper_value):
-        base_link_pos[2] = 0.0139576627708
-        pre_grasp_pos =  [base_link_pos[0],base_link_pos[1],base_link_pos[2]+0.165+0.03]
-        grasp_pos =  [base_link_pos[0],base_link_pos[1],base_link_pos[2]+0.165-0.025]
+        base_link_pos[2] = self.work_surface_z
+        pre_grasp_pos =  [base_link_pos[0], base_link_pos[1], base_link_pos[2] + self.tool_z_offset + self.approach_offset]
+        grasp_pos =  [base_link_pos[0], base_link_pos[1], base_link_pos[2] + self.tool_z_offset - self.grasp_depth_offset]
         try:
             control_gripper(0)
             self.move.move_p(pre_grasp_pos,a=0.6,v=0.6)
@@ -90,10 +96,10 @@ class UR_Grasp:
 
     def push(self,base_link_pos,angle):
         control_gripper(0.78)
-        base_link_pos[2] = 0.0139576627708 
-        pre_push_pos =  [base_link_pos[0],base_link_pos[1],base_link_pos[2]+0.165+0.03]
-        push_pos =  [base_link_pos[0],base_link_pos[1],base_link_pos[2]+0.165-0.025]
-        push_length = 0.13
+        base_link_pos[2] = self.work_surface_z
+        pre_push_pos =  [base_link_pos[0], base_link_pos[1], base_link_pos[2] + self.tool_z_offset + self.approach_offset]
+        push_pos =  [base_link_pos[0], base_link_pos[1], base_link_pos[2] + self.tool_z_offset - self.grasp_depth_offset]
+        push_length = self.push_length
         angle_rad = math.radians(angle)
         target_x = base_link_pos[0]  + push_length * math.cos(angle_rad)
         target_y = base_link_pos[1]  + push_length * math.sin(angle_rad)
@@ -149,7 +155,8 @@ if __name__ == "__main__":
     ur5_grasp.camera.save_images(color_filename="saved_picture/color{}.png",
                             depth_filename="saved_picture/depth{}.png".format(ur5_grasp.camera.counter))
     print("Saving {} image".format(ur5_grasp.camera.counter))
-    server = rospy.Service("moveit_grasp",grasp_pose,grasp_callback )
+    service_name = rospy.get_param("~service_name", "moveit_grasp")
+    server = rospy.Service(service_name, grasp_pose, grasp_callback)
     print("***************************")
     print("Waiting for client request......")
     print("***************************")

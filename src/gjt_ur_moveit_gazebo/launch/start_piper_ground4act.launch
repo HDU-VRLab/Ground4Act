@@ -1,0 +1,15 @@
+<launch>
+  <!-- One-shot launcher for running Ground4Act service on Piper -->
+  <arg name="params_file" default="$(find gjt_ur_moveit_gazebo)/config/piper_adapter_params.yaml"/>
+  <arg name="service_name" default="moveit_grasp"/>
+
+  <rosparam file="$(arg params_file)" command="load"/>
+
+  <node pkg="gjt_ur_moveit_gazebo"
+        type="moveitServer.py"
+        name="piper_ground4act_server"
+        output="screen"
+        cwd="node">
+    <param name="service_name" value="$(arg service_name)"/>
+  </node>
+</launch>
